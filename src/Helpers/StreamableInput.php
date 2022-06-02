@@ -4,11 +4,6 @@ namespace EddIriarte\Console\Helpers;
 
 use Symfony\Component\Console\Input\StreamableInputInterface;
 
-/**
- * Trait OptionChunks
- * @package EddIriarte\Console\Helpers
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 trait StreamableInput
 {
 	/** @var resource */

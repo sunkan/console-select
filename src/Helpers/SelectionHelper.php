@@ -14,9 +14,6 @@ use EddIriarte\Console\Inputs\Interfaces\SelectInput;
  * Class SelectionHelper
  *
  * It's used for registration to symfony output helpers.
- *
- * @package EddIriarte\Console\Helpers
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
  */
 class SelectionHelper implements HelperInterface
 {

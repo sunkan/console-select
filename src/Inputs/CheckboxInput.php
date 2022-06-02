@@ -5,11 +5,6 @@ namespace EddIriarte\Console\Inputs;
 use EddIriarte\Console\Inputs\AbstractSelect;
 use EddIriarte\Console\Inputs\Exceptions\UnknownOption;
 
-/**
- * Class CheckboxInput
- * @package EddIriarte\Console\Inputs
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 class CheckboxInput extends AbstractSelect
 {
 	public function select(string $option): void

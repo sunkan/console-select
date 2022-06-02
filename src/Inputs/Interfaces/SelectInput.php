@@ -2,11 +2,6 @@
 
 namespace EddIriarte\Console\Inputs\Interfaces;
 
-/**
- * Interface SelectInput
- * @package EddIriarte\Console\Inputs\Interfaces
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 interface SelectInput
 {
 	public function getMessage(): string;

@@ -6,11 +6,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 use EddIriarte\Console\Inputs\Interfaces\SelectInput;
 
-/**
- * Class SelectHandler
- * @package Lazzier\Helpers
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 class SelectHandler
 {
 	/** @var resource */

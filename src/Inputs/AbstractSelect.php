@@ -5,12 +5,6 @@ namespace EddIriarte\Console\Inputs;
 use EddIriarte\Console\Inputs\Traits\ChunkableOptions;
 use EddIriarte\Console\Inputs\Interfaces\SelectInput;
 
-
-/**
- * Class AbstractSelect
- * @package EddIriarte\Console\Inputs
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 abstract class AbstractSelect implements SelectInput
 {
 	use ChunkableOptions;

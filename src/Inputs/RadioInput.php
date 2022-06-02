@@ -4,12 +4,6 @@ namespace EddIriarte\Console\Inputs;
 
 use EddIriarte\Console\Inputs\Exceptions\UnknownOption;
 
-
-/**
- * Class RadioInput
- * @package EddIriarte\Console\Inputs
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 class RadioInput extends AbstractSelect
 {
 	public function select(string $option): void

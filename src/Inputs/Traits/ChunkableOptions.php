@@ -4,16 +4,9 @@ namespace EddIriarte\Console\Inputs\Traits;
 
 use EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange;
 
-
-/**
- * Trait ChunkableOptions
- * @package EddIriarte\Console\Inputs\Traits
- * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
- */
 trait ChunkableOptions
 {
 	protected array $chunks;
-
 	protected int $chunkSize = 3;
 
 	/**
