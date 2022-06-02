@@ -1,4 +1,5 @@
 <?php
+
 namespace EddIriarte\Console\Helpers;
 
 use EddIriarte\Console\Handlers\SelectHandler;
@@ -19,97 +20,97 @@ use EddIriarte\Console\Inputs\Interfaces\SelectInput;
  */
 class SelectionHelper implements HelperInterface
 {
-    use StreamableInput;
+	use StreamableInput;
 
-    /**
-     * @var InputInterface
-     */
-    protected $input;
+	/**
+	 * @var InputInterface
+	 */
+	protected $input;
 
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
+	/**
+	 * @var OutputInterface
+	 */
+	protected $output;
 
-    /**
-     * @var null
-     */
-    protected $helperSet = null;
+	/**
+	 * @var null
+	 */
+	protected $helperSet = null;
 
-    /**
-     * SelectionHelper constructor.
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     */
-    public function __construct(InputInterface $input, OutputInterface $output)
-    {
-        $this->input = $input;
-        $this->output = $output;
+	/**
+	 * SelectionHelper constructor.
+	 * @param InputInterface $input
+	 * @param OutputInterface $output
+	 */
+	public function __construct(InputInterface $input, OutputInterface $output)
+	{
+		$this->input = $input;
+		$this->output = $output;
 
-        $this->checkAnsiSupport();
-        $this->setOutputStyles();
-    }
+		$this->checkAnsiSupport();
+		$this->setOutputStyles();
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setHelperSet(HelperSet $helperSet = null)
-    {
-        $this->helperSet = $helperSet;
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setHelperSet(HelperSet $helperSet = null)
+	{
+		$this->helperSet = $helperSet;
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getHelperSet()
-    {
-        return $this->helperSet;
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getHelperSet(): ?HelperSet
+	{
+		return $this->helperSet;
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'selection';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getName()
+	{
+		return 'selection';
+	}
 
-    /**
-     * Allow multiple item selections to user.
-     *
-     * @param SelectInput $question
-     * @return array
-     */
-    public function select(SelectInput $question)
-    {
-        $select = new SelectHandler($question, $this->output, $this->getInputStream());
+	/**
+	 * Allow multiple item selections to user.
+	 *
+	 * @param SelectInput $question
+	 * @return array
+	 */
+	public function select(SelectInput $question)
+	{
+		$select = new SelectHandler($question, $this->output, $this->getInputStream());
 
-        $responses = $select->handle();
-        // TODO: validate responses  ???
+		$responses = $select->handle();
+		// TODO: validate responses  ???
 
-        return $responses;
-    }
+		return $responses;
+	}
 
-    /**
-     *
-     */
-    protected function checkAnsiSupport(): void
-    {
-        if ($this->output->isDecorated()) {
-            return;
-        }
+	/**
+	 *
+	 */
+	protected function checkAnsiSupport(): void
+	{
+		if ($this->output->isDecorated()) {
+			return;
+		}
 
-        // // disable overwrite when output does not support ANSI codes.
-        // $this->overwrite = false;
-        // // set a reasonable redraw frequency so output isn't flooded
-        // $this->setRedrawFrequency(10);
-    }
+		// // disable overwrite when output does not support ANSI codes.
+		// $this->overwrite = false;
+		// // set a reasonable redraw frequency so output isn't flooded
+		// $this->setRedrawFrequency(10);
+	}
 
-    protected function setOutputStyles()
-    {
-        if (!$this->output->getFormatter()->hasStyle('hl')) {
-            $style = new OutputFormatterStyle('black', 'white');
-            $this->output->getFormatter()->setStyle('hl', $style);
-        }
-    }
+	protected function setOutputStyles()
+	{
+		if (!$this->output->getFormatter()->hasStyle('hl')) {
+			$style = new OutputFormatterStyle('black', 'white');
+			$this->output->getFormatter()->setStyle('hl', $style);
+		}
+	}
 }

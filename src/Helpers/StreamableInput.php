@@ -1,4 +1,5 @@
 <?php
+
 namespace EddIriarte\Console\Helpers;
 
 use Symfony\Component\Console\Input\StreamableInputInterface;
@@ -10,20 +11,20 @@ use Symfony\Component\Console\Input\StreamableInputInterface;
  */
 trait StreamableInput
 {
-    /**
-     * @var resource
-     */
-    protected $inputStream;
+	/**
+	 * @var resource
+	 */
+	protected $inputStream;
 
-    /**
-     * @return bool|resource
-     */
-    protected function getInputStream()
-    {
-        if (empty($this->inputStream) && $this->input instanceof StreamableInputInterface) {
-            $this->inputStream = $this->input->getStream() ?: STDIN;
-        }
+	/**
+	 * @return bool|resource
+	 */
+	protected function getInputStream()
+	{
+		if (empty($this->inputStream) && $this->input instanceof StreamableInputInterface) {
+			$this->inputStream = $this->input->getStream() ?: STDIN;
+		}
 
-        return $this->inputStream;
-    }
+		return $this->inputStream;
+	}
 }

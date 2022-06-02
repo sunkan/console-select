@@ -12,15 +12,15 @@ use EddIriarte\Console\Inputs\Exceptions\UnknownOption;
  */
 class RadioInput extends AbstractSelect
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function select(string $option): void
-    {
-        if (empty(array_intersect($this->options, [$option]))) {
-            throw new UnknownOption($option);
-        }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function select(string $option): void
+	{
+		if (empty(array_intersect($this->options, [$option]))) {
+			throw new UnknownOption($option);
+		}
 
-        $this->selections = $this->isSelected($option) ? [] : [$option];
-    }
+		$this->selections = $this->isSelected($option) ? [] : [$option];
+	}
 }
