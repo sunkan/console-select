@@ -174,7 +174,7 @@ class SelectHandler
 	{
 		$chunkSize = $this->chunkSize();
 		$chunks = $this->question->getChunks($chunkSize);
-		$columnSpace = floor(($this->terminalWidth() - ($chunkSize * 5)) / $chunkSize);
+		$columnSpace = (int)floor(($this->terminalWidth() - ($chunkSize * 5)) / $chunkSize);
 		return implode(PHP_EOL, array_map(function ($entries) use ($chunks, $columnSpace) {
 			$hasCursor = $this->row === array_search($entries, $chunks, true);
 			return $this->makeRow($entries, ($hasCursor ? $this->column : -10), $columnSpace);

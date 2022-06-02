@@ -42,7 +42,7 @@ trait ChunkableOptions
 			return $this->getChunks()[$index];
 		}
 
-		throw new IndexOutOfRange($index);
+		throw new IndexOutOfRange((string)$index);
 	}
 
 	public function getChunksCount(): int
