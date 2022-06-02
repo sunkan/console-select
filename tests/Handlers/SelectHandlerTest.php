@@ -17,7 +17,7 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_handles_radio_inputs()
+	public function it_handles_radio_inputs(): void
 	{
 		$question = new RadioInput('Select one', ['one', 'two', 'three']);
 		$output = $this->createOutputInterface();
@@ -42,7 +42,7 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_handles_checkboxes_inputs()
+	public function it_handles_checkboxes_inputs(): void
 	{
 		$question = new CheckboxInput('Select one', ['one', 'two', 'three']);
 		$output = $this->createOutputInterface();
@@ -68,7 +68,7 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_handles_selection_toggle()
+	public function it_handles_selection_toggle(): void
 	{
 		$question = new CheckboxInput('Select one', ['one', 'two', 'three']);
 		$output = $this->createOutputInterface();
@@ -96,14 +96,17 @@ class SelectHandlerTest extends TestCase
 	 * @test
 	 * @dataProvider provideExistenceCheckers
 	 */
-	public function it_checks_option_existence($handler, $row, $column, $expected)
+	public function it_checks_option_existence($handler, $row, $column, $expected): void
 	{
 		$exists = $handler->exists($row, $column);
 
 		$this->assertEquals($expected, $exists);
 	}
 
-	public function provideExistenceCheckers()
+	/**
+	 * @return array<array-key, array{SelectHandler, int, int, bool}>
+	 */
+	public function provideExistenceCheckers(): array
 	{
 		$question = new CheckboxInput('Select one', [
 			'one', 'two', 'three',
@@ -127,7 +130,7 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_clears_checkbox_output()
+	public function it_clears_checkbox_output(): void
 	{
 		$question = new CheckboxInput('Select an item', [
 			'one', 'two', 'three',
@@ -136,13 +139,13 @@ class SelectHandlerTest extends TestCase
 		$buffer = new TestConsoleBuffer;
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->expects($this->any())
+		$output
 			->method('write')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'write'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'write']));
 
-		$output->expects($this->any())
+		$output
 			->method('writeln')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'writeln'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'writeln']));
 
 		$stream = $this->getInputStream(Key::RIGHT);
 		$handler = new SelectHandler($question, $output, $stream);
@@ -161,7 +164,7 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_can_navigate_down()
+	public function it_can_navigate_down(): void
 	{
 		$question = new CheckboxInput('Select an item', [
 			'one', 'two', 'three', 'four', 'five', 'six',
@@ -170,13 +173,13 @@ class SelectHandlerTest extends TestCase
 		$buffer = new TestConsoleBuffer;
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->expects($this->any())
+		$output
 			->method('write')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'write'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'write']));
 
-		$output->expects($this->any())
+		$output
 			->method('writeln')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'writeln'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'writeln']));
 
 		$stream = $this->getInputStream(
 			Key::DOWN .
@@ -185,14 +188,14 @@ class SelectHandlerTest extends TestCase
 		$handler = new SelectHandler($question, $output, $stream);
 		$handler->handle();
 
-		list($selection) = $question->getSelections();
+		[$selection] = $question->getSelections();
 		$this->assertEquals('four', $selection);
 	}
 
 	/**
 	 * @test
 	 */
-	public function it_can_navigate_up()
+	public function it_can_navigate_up(): void
 	{
 		$question = new CheckboxInput('Select an item', [
 			'one', 'two', 'three', 'four', 'five', 'six',
@@ -201,13 +204,13 @@ class SelectHandlerTest extends TestCase
 		$buffer = new TestConsoleBuffer;
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->expects($this->any())
+		$output
 			->method('write')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'write'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'write']));
 
-		$output->expects($this->any())
+		$output
 			->method('writeln')
-			->will($this->returnCallback(\Closure::fromCallable([$buffer, 'writeln'])));
+			->willReturnCallback(\Closure::fromCallable([$buffer, 'writeln']));
 
 		$stream = $this->getInputStream(
 			Key::DOWN .
@@ -218,7 +221,7 @@ class SelectHandlerTest extends TestCase
 		$handler = new SelectHandler($question, $output, $stream);
 		$handler->handle();
 
-		list($selection) = $question->getSelections();
+		[$selection] = $question->getSelections();
 		$this->assertEquals('two', $selection);
 	}
 }

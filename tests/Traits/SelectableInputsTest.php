@@ -15,7 +15,7 @@ class SelectableInputsTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_enables_select_helper_set()
+	public function it_enables_select_helper_set(): void
 	{
 		$trait = $this->getMockForTrait(
 			SelectableInputs::class,
@@ -42,7 +42,7 @@ class SelectableInputsTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_does_select_single()
+	public function it_does_select_single(): void
 	{
 		$trait = $this->getMockForTrait(
 			SelectableInputs::class,
@@ -57,13 +57,12 @@ class SelectableInputsTest extends TestCase
 		$helperMock = $this->getMockBuilder(SelectionHelper::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$helperMock->method('select')
-			->will($this->returnValue([]));
+		$helperMock->method('select')->willReturn([]);
 
 		$trait->method('getHelper')
-			->will($this->returnValueMap([
+			->willReturnMap([
 				['selection', $helperMock],
-			]));
+			]);
 
 		$selection = $trait->select(
 			'Select an item from the list',
@@ -77,7 +76,7 @@ class SelectableInputsTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_does_select_multiple()
+	public function it_does_select_multiple(): void
 	{
 		$trait = $this->getMockForTrait(
 			SelectableInputs::class,
@@ -92,13 +91,12 @@ class SelectableInputsTest extends TestCase
 		$helperMock = $this->getMockBuilder(SelectionHelper::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$helperMock->method('select')
-			->will($this->returnValue([]));
+		$helperMock->method('select')->willReturn([]);
 
 		$trait->method('getHelper')
-			->will($this->returnValueMap([
+			->willReturnMap([
 				['selection', $helperMock],
-			]));
+			]);
 
 		$selection = $trait->select(
 			'Select an item from the list',

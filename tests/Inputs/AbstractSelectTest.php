@@ -10,7 +10,7 @@ class AbstractSelectTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_gets_message()
+	public function it_gets_message(): void
 	{
 		$select = $this->getMockForAbstractClass(
 			AbstractSelect::class,
@@ -28,7 +28,7 @@ class AbstractSelectTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_gets_options()
+	public function it_gets_options(): void
 	{
 		$select = $this->getMockForAbstractClass(
 			AbstractSelect::class,
@@ -46,7 +46,7 @@ class AbstractSelectTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_gets_selections()
+	public function it_gets_selections(): void
 	{
 		$select = $this->getMockForAbstractClass(
 			AbstractSelect::class,
@@ -73,7 +73,7 @@ class AbstractSelectTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_has_selections()
+	public function it_has_selections(): void
 	{
 		$select = $this->getMockForAbstractClass(
 			AbstractSelect::class,
@@ -94,7 +94,7 @@ class AbstractSelectTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_is_selected()
+	public function it_is_selected(): void
 	{
 		$select = $this->getMockForAbstractClass(
 			AbstractSelect::class,

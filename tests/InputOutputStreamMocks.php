@@ -18,11 +18,11 @@ trait InputOutputStreamMocks
 	public function createStreamableInputInterface($stream = null, $interactive = true)
 	{
 		$mock = $this->getMockBuilder(StreamableInputInterface::class)->getMock();
-		$mock->expects($this->any())
+		$mock
 			->method('isInteractive')
-			->will($this->returnValue($interactive));
+			->willReturn($interactive);
 		if ($stream) {
-			$mock->expects($this->any())
+			$mock
 				->method('getStream')
 				->willReturn($stream);
 		}
@@ -30,7 +30,7 @@ trait InputOutputStreamMocks
 		return $mock;
 	}
 
-	public function createOutputInterface(bool $canWrite = false)
+	public function createOutputInterface(bool $canWrite = false): StreamOutput
 	{
 		return new StreamOutput(
 			fopen('php://memory', ($canWrite ? 'w+' : 'r+'), false)

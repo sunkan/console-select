@@ -12,19 +12,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tests\InputOutputStreamMocks;
 use Tests\Key;
 
-class SelectHandlerTest extends TestCase
+class SelectionHelperTest extends TestCase
 {
 	use InputOutputStreamMocks;
 
 	/**
 	 * @test
 	 */
-	public function it_initializes_output_styles()
+	public function it_initializes_output_styles(): void
 	{
 		$hasStyle = false;
 		$formatter = $this->getMockBuilder(OutputFormatterInterface::class)
 			->getMock();
-		$formatter->method('hasStyle')->will($this->returnValue($hasStyle));
+		$formatter->method('hasStyle')->willReturn($hasStyle);
 		$formatter->method('setStyle')
 			->willReturnCallback(function ($name, $style) use (&$hasStyle) {
 				$hasStyle = $name === 'hl';
@@ -32,10 +32,8 @@ class SelectHandlerTest extends TestCase
 
 		$input = $this->getMockBuilder(InputInterface::class)->getMock();
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->method('isDecorated')
-			->will($this->returnValue(true));
-		$output->method('getFormatter')
-			->will($this->returnValue($formatter));
+		$output->method('isDecorated')->willReturn(true);
+		$output->method('getFormatter')->willReturn($formatter);
 
 		$helper = new SelectionHelper($input, $output);
 		$this->assertTrue($hasStyle, 'Style was not initialized');
@@ -44,14 +42,14 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_gets_name()
+	public function it_gets_name(): void
 	{
 		$formatter = $this->getMockBuilder(OutputFormatterInterface::class)->getMock();
-		$formatter->method('hasStyle')->will($this->returnValue(true));
+		$formatter->method('hasStyle')->willReturn(true);
 		$input = $this->getMockBuilder(InputInterface::class)->getMock();
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->method('isDecorated')->will($this->returnValue(true));
-		$output->method('getFormatter')->will($this->returnValue($formatter));
+		$output->method('isDecorated')->willReturn(true);
+		$output->method('getFormatter')->willReturn($formatter);
 
 		$helper = new SelectionHelper($input, $output);
 
@@ -62,27 +60,26 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function it_manipulates_helpersets()
+	public function it_manipulates_helpersets(): void
 	{
 		$formatter = $this->getMockBuilder(OutputFormatterInterface::class)->getMock();
-		$formatter->method('hasStyle')->will($this->returnValue(true));
+		$formatter->method('hasStyle')->willReturn(true);
 		$input = $this->getMockBuilder(InputInterface::class)->getMock();
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
-		$output->method('isDecorated')->will($this->returnValue(true));
-		$output->method('getFormatter')->will($this->returnValue($formatter));
+		$output->method('isDecorated')->willReturn(true);
+		$output->method('getFormatter')->willReturn($formatter);
 
 		$helper = new SelectionHelper($input, $output);
-		$this->assertTrue(empty($helper->getHelperSet()), 'HelperSet already exists!');
+		$this->assertEmpty($helper->getHelperSet(), 'HelperSet already exists!');
 
 		$helper->setHelperSet(new HelperSet());
-		$this->assertFalse(empty($helper->getHelperSet()), "HelperSet isn't  set!");
-
+		$this->assertNotEmpty($helper->getHelperSet(), "HelperSet isn't  set!");
 	}
 
 	/**
 	 * @test
 	 */
-	public function it_triggers_selection()
+	public function it_triggers_selection(): void
 	{
 		$stream = $this->getInputStream(Key::RIGHT . Key::SELECT);
 		$input = $this->createStreamableInputInterface($stream);
@@ -91,7 +88,7 @@ class SelectHandlerTest extends TestCase
 		$helper = new SelectionHelper($input, $output);
 
 		$question = new CheckboxInput('Select one', ['one', 'two', 'three']);
-		list($response) = $helper->select($question);
+		[$response] = $helper->select($question);
 
 		$this->assertEquals('two', $response);
 	}
