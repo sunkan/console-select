@@ -37,7 +37,7 @@ class SelectHandler
 	/**
 	 * Navigates through option items.
 	 *
-	 * @return array
+	 * @return list<string>
 	 */
 	public function handle(): array
 	{
@@ -182,9 +182,9 @@ class SelectHandler
 	}
 
 	/**
-	 * @return mixed
+	 * @param list<string> $entries
 	 */
-	protected function makeRow(array $entries, int $activeColumn, int $columnSpace)
+	protected function makeRow(array $entries, int $activeColumn, int $columnSpace): string
 	{
 		return array_reduce($entries, function ($carry, $item) use ($entries, $activeColumn, $columnSpace) {
 			$isActive = $activeColumn === array_search($item, $entries, true);

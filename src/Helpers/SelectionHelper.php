@@ -62,7 +62,7 @@ class SelectionHelper implements HelperInterface
 	/**
 	 * Allow multiple item selections to user.
 	 *
-	 * @return array
+	 * @return list<string>
 	 */
 	public function select(SelectInput $question): array
 	{

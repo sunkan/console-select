@@ -17,7 +17,7 @@ trait ChunkableOptions
 	protected int $chunkSize = 3;
 
 	/**
-	 * @return array
+	 * @return array<int, list<string>>
 	 */
 	public function getChunks(int $chunkSize = null): array
 	{
@@ -33,7 +33,7 @@ trait ChunkableOptions
 	}
 
 	/**
-	 * @return array
+	 * @return array<int, list<string>>
 	 * @throws IndexOutOfRange
 	 */
 	public function getChunkAt(int $index): array

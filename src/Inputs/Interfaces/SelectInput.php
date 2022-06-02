@@ -12,12 +12,12 @@ interface SelectInput
 	public function getMessage(): string;
 
 	/**
-	 * @return array
+	 * @return list<string>
 	 */
 	public function getOptions(): array;
 
 	/**
-	 * @return array
+	 * @return list<string>
 	 */
 	public function getSelections(): array;
 

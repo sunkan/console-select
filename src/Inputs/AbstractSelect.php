@@ -16,11 +16,14 @@ abstract class AbstractSelect implements SelectInput
 	use ChunkableOptions;
 
 	protected string $message;
+	/** @var list<string> */
 	protected array $options;
+	/** @var list<string> */
 	protected array $selections;
 
 	/**
-	 * @param array $options
+	 * @param list<string> $options
+	 * @param list<string> $defaultSelection
 	 */
 	public function __construct(string $message, array $options, array $defaultSelection = [])
 	{
@@ -35,7 +38,7 @@ abstract class AbstractSelect implements SelectInput
 	}
 
 	/**
-	 * @return array
+	 * @return list<string>
 	 */
 	public function getOptions(): array
 	{
@@ -43,7 +46,7 @@ abstract class AbstractSelect implements SelectInput
 	}
 
 	/**
-	 * @return array
+	 * @return list<string>
 	 */
 	public function getSelections(): array
 	{
