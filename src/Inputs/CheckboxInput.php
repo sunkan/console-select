@@ -12,9 +12,6 @@ use EddIriarte\Console\Inputs\Exceptions\UnknownOption;
  */
 class CheckboxInput extends AbstractSelect
 {
-	/**
-	 * {@inheritdoc}
-	 */
 	public function select(string $option): void
 	{
 		if (empty(array_intersect($this->options, [$option]))) {

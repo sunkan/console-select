@@ -11,14 +11,10 @@ use Symfony\Component\Console\Input\StreamableInputInterface;
  */
 trait StreamableInput
 {
-	/**
-	 * @var resource
-	 */
+	/** @var resource */
 	protected $inputStream;
 
-	/**
-	 * @return bool|resource
-	 */
+	/** @return bool|resource */
 	protected function getInputStream()
 	{
 		if (empty($this->inputStream) && $this->input instanceof StreamableInputInterface) {

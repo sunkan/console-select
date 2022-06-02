@@ -9,9 +9,6 @@ namespace EddIriarte\Console\Inputs\Interfaces;
  */
 interface SelectInput
 {
-	/**
-	 * @return string
-	 */
 	public function getMessage(): string;
 
 	/**
@@ -24,19 +21,9 @@ interface SelectInput
 	 */
 	public function getSelections(): array;
 
-	/**
-	 * @return bool
-	 */
 	public function hasSelections(): bool;
 
-	/**
-	 * @param string $option
-	 * @return bool
-	 */
 	public function isSelected(string $option): bool;
 
-	/**
-	 * @param string $option
-	 */
 	public function select(string $option): void;
 }

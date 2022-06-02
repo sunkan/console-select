@@ -22,26 +22,13 @@ class SelectionHelper implements HelperInterface
 {
 	use StreamableInput;
 
-	/**
-	 * @var InputInterface
-	 */
+	/** @var InputInterface */
 	protected $input;
-
-	/**
-	 * @var OutputInterface
-	 */
+	/** @var OutputInterface */
 	protected $output;
-
-	/**
-	 * @var null
-	 */
+	/** @var null */
 	protected $helperSet = null;
 
-	/**
-	 * SelectionHelper constructor.
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 */
 	public function __construct(InputInterface $input, OutputInterface $output)
 	{
 		$this->input = $input;
@@ -78,7 +65,6 @@ class SelectionHelper implements HelperInterface
 	/**
 	 * Allow multiple item selections to user.
 	 *
-	 * @param SelectInput $question
 	 * @return array
 	 */
 	public function select(SelectInput $question)
@@ -91,9 +77,6 @@ class SelectionHelper implements HelperInterface
 		return $responses;
 	}
 
-	/**
-	 *
-	 */
 	protected function checkAnsiSupport(): void
 	{
 		if ($this->output->isDecorated()) {

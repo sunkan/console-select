@@ -33,7 +33,6 @@ trait ChunkableOptions
 	}
 
 	/**
-	 * @param int $index
 	 * @return array
 	 * @throws \EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange
 	 */
@@ -46,19 +45,11 @@ trait ChunkableOptions
 		throw new IndexOutOfRange($index);
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getChunksCount(): int
 	{
 		return count($this->getChunks());
 	}
 
-	/**
-	 * @param int $rowIndex
-	 * @param int $colIndex
-	 * @return bool
-	 */
 	public function hasEntryAt(int $rowIndex, int $colIndex): bool
 	{
 		$chunks = $this->getChunks();
@@ -66,9 +57,6 @@ trait ChunkableOptions
 	}
 
 	/**
-	 * @param int $rowIndex
-	 * @param int $colIndex
-	 * @return string
 	 * @throws \EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange
 	 */
 	public function getEntryAt(int $rowIndex, int $colIndex): string

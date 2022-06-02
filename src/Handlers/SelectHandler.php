@@ -13,46 +13,23 @@ use EddIriarte\Console\Inputs\Interfaces\SelectInput;
  */
 class SelectHandler
 {
-	/**
-	 * @var resource
-	 */
+	/** @var resource */
 	protected $stream;
-
-	/**
-	 * @var OutputInterface
-	 */
+	/** @var OutputInterface */
 	protected $output;
-
-	/**
-	 * @var SelectInput
-	 */
+	/** @var SelectInput */
 	protected $question;
-
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	protected $row;
-
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	protected $column;
-
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	protected $firstRun;
-
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	protected $terminalWidth;
 
 	/**
-	 * SelectStreamHandler constructor.
-	 * @param SelectInput $question
-	 * @param OutputInterface $output
-	 * @param $stream
+	 * @param resource $stream
 	 */
 	public function __construct(SelectInput $question, OutputInterface $output, $stream)
 	{
@@ -108,19 +85,11 @@ class SelectHandler
 		return $this->question->getSelections();
 	}
 
-	/**
-	 * @param $row
-	 * @param $column
-	 * @return bool
-	 */
 	public function exists($row, $column): bool
 	{
 		return $this->question->hasEntryAt($row, $column);
 	}
 
-	/**
-	 *
-	 */
 	protected function up(): void
 	{
 		if ($this->exists($this->row - 1, $this->column)) {
@@ -128,9 +97,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 *
-	 */
 	protected function down(): void
 	{
 		if ($this->exists($this->row + 1, $this->column)) {
@@ -138,9 +104,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 *
-	 */
 	protected function left(): void
 	{
 		if ($this->exists($this->row, $this->column - 1)) {
@@ -148,9 +111,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 *
-	 */
 	protected function right(): void
 	{
 		if ($this->exists($this->row, $this->column + 1)) {
@@ -158,9 +118,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 *
-	 */
 	protected function tryCellSelection(): void
 	{
 		// Try to select cell.
@@ -171,7 +128,7 @@ class SelectHandler
 	}
 
 	/**
-	 * @param $char
+	 * @param string $char
 	 */
 	protected function tryCellNavigation($char): void
 	{
@@ -198,9 +155,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 *
-	 */
 	public function repaint(): void
 	{
 		$message = $this->message();
@@ -212,9 +166,6 @@ class SelectHandler
 		$this->output->write($message);
 	}
 
-	/**
-	 *
-	 */
 	public function clear(): void
 	{
 		// Move the cursor to the beginning of the line
@@ -228,9 +179,6 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 * @return string
-	 */
 	protected function message(): string
 	{
 		$chunkSize = $this->chunkSize();
@@ -243,8 +191,6 @@ class SelectHandler
 	}
 
 	/**
-	 * @param array $entries
-	 * @param int $activeColumn
 	 * @return mixed
 	 */
 	protected function makeRow(array $entries, int $activeColumn, int $columnSpace)
@@ -255,12 +201,6 @@ class SelectHandler
 		}, '');
 	}
 
-	/**
-	 * @param string $option
-	 * @param bool $hasCursor
-	 * @param int $maxWidth
-	 * @return string
-	 */
 	protected function makeCell(string $option, bool $hasCursor = false, int $maxWidth = 20): string
 	{
 		$selected = $this->question->isSelected($option);

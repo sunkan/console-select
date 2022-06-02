@@ -22,9 +22,6 @@ abstract class AbstractSelect implements SelectInput
 	protected $selections;
 
 	/**
-	 * AbstractSelect constructor.
-	 *
-	 * @param string $message
 	 * @param array $options
 	 */
 	public function __construct(string $message, array $options)
@@ -34,9 +31,6 @@ abstract class AbstractSelect implements SelectInput
 		$this->selections = [];
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function getMessage(): string
 	{
 		return $this->message;
@@ -58,18 +52,11 @@ abstract class AbstractSelect implements SelectInput
 		return $this->selections;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function hasSelections(): bool
 	{
 		return !empty($this->selections);
 	}
 
-	/**
-	 * @param string $option
-	 * @return bool
-	 */
 	public function isSelected(string $option): bool
 	{
 		return (bool)in_array($option, $this->selections);
