@@ -22,11 +22,11 @@ abstract class AbstractSelect implements SelectInput
 	/**
 	 * @param array $options
 	 */
-	public function __construct(string $message, array $options)
+	public function __construct(string $message, array $options, array $defaultSelection = [])
 	{
 		$this->message = $message;
 		$this->options = $options;
-		$this->selections = [];
+		$this->selections = $defaultSelection;
 	}
 
 	public function getMessage(): string
