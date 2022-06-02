@@ -12,13 +12,11 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.2.5",
-        "symfony/console": "^5.0",
-        "illuminate/support": "^5.5"
+        "php": "^7.4 || 8.0.*",
+        "symfony/console": "^5.0 || ^6.0"
     },
     "require-dev": {
-        "php-mock/php-mock-phpunit": "^2.0",
-        "phpunit/phpunit": "6.4.*"
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "autoload": {
         "psr-4": {
