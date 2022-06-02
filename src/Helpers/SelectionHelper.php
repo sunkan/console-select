@@ -13,7 +13,7 @@ use EddIriarte\Console\Inputs\Interfaces\SelectInput;
 /**
  * Class SelectionHelper
  *
- * Its used for registration to symfonys output helpers.
+ * It's used for registration to symfony output helpers.
  *
  * @package EddIriarte\Console\Helpers
  * @author Eduardo Iriarte <eddiriarte[at]gmail[dot]com>
@@ -22,12 +22,9 @@ class SelectionHelper implements HelperInterface
 {
 	use StreamableInput;
 
-	/** @var InputInterface */
-	protected $input;
-	/** @var OutputInterface */
-	protected $output;
-	/** @var null */
-	protected $helperSet = null;
+	protected InputInterface $input;
+	protected OutputInterface $output;
+	protected ?HelperSet $helperSet = null;
 
 	public function __construct(InputInterface $input, OutputInterface $output)
 	{
@@ -41,7 +38,7 @@ class SelectionHelper implements HelperInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function setHelperSet(HelperSet $helperSet = null)
+	public function setHelperSet(HelperSet $helperSet = null): void
 	{
 		$this->helperSet = $helperSet;
 	}
@@ -57,7 +54,7 @@ class SelectionHelper implements HelperInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return 'selection';
 	}
@@ -67,7 +64,7 @@ class SelectionHelper implements HelperInterface
 	 *
 	 * @return array
 	 */
-	public function select(SelectInput $question)
+	public function select(SelectInput $question): array
 	{
 		$select = new SelectHandler($question, $this->output, $this->getInputStream());
 
@@ -89,7 +86,7 @@ class SelectionHelper implements HelperInterface
 		// $this->setRedrawFrequency(10);
 	}
 
-	protected function setOutputStyles()
+	protected function setOutputStyles(): void
 	{
 		if (!$this->output->getFormatter()->hasStyle('hl')) {
 			$style = new OutputFormatterStyle('black', 'white');

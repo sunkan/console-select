@@ -15,11 +15,9 @@ abstract class AbstractSelect implements SelectInput
 {
 	use ChunkableOptions;
 
-	protected $message;
-
-	protected $options;
-
-	protected $selections;
+	protected string $message;
+	protected array $options;
+	protected array $selections;
 
 	/**
 	 * @param array $options
@@ -59,6 +57,6 @@ abstract class AbstractSelect implements SelectInput
 
 	public function isSelected(string $option): bool
 	{
-		return (bool)in_array($option, $this->selections);
+		return in_array($option, $this->selections, true);
 	}
 }

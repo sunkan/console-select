@@ -15,18 +15,12 @@ class SelectHandler
 {
 	/** @var resource */
 	protected $stream;
-	/** @var OutputInterface */
-	protected $output;
-	/** @var SelectInput */
-	protected $question;
-	/** @var int */
-	protected $row;
-	/** @var int */
-	protected $column;
-	/** @var bool */
-	protected $firstRun;
-	/** @var int */
-	protected $terminalWidth;
+	protected OutputInterface $output;
+	protected SelectInput $question;
+	protected int $row;
+	protected int $column;
+	protected bool $firstRun = false;
+	protected int $terminalWidth = 0;
 
 	/**
 	 * @param resource $stream
@@ -85,7 +79,7 @@ class SelectHandler
 		return $this->question->getSelections();
 	}
 
-	public function exists($row, $column): bool
+	public function exists(int $row, int $column): bool
 	{
 		return $this->question->hasEntryAt($row, $column);
 	}
@@ -127,10 +121,7 @@ class SelectHandler
 		}
 	}
 
-	/**
-	 * @param string $char
-	 */
-	protected function tryCellNavigation($char): void
+	protected function tryCellNavigation(string $char): void
 	{
 		// Did we read an escape sequence?
 		$char .= fread($this->stream, 2);
@@ -184,8 +175,8 @@ class SelectHandler
 		$chunkSize = $this->chunkSize();
 		$chunks = $this->question->getChunks($chunkSize);
 		$columnSpace = floor(($this->terminalWidth() - ($chunkSize * 5)) / $chunkSize);
-		return join(PHP_EOL, array_map(function ($entries) use ($chunks, $columnSpace) {
-			$hasCursor = (bool)($this->row === array_search($entries, $chunks));
+		return implode(PHP_EOL, array_map(function ($entries) use ($chunks, $columnSpace) {
+			$hasCursor = $this->row === array_search($entries, $chunks, true);
 			return $this->makeRow($entries, ($hasCursor ? $this->column : -10), $columnSpace);
 		}, $chunks));
 	}
@@ -196,7 +187,7 @@ class SelectHandler
 	protected function makeRow(array $entries, int $activeColumn, int $columnSpace)
 	{
 		return array_reduce($entries, function ($carry, $item) use ($entries, $activeColumn, $columnSpace) {
-			$isActive = ($activeColumn === array_search($item, $entries));
+			$isActive = $activeColumn === array_search($item, $entries, true);
 			return $carry . $this->makeCell($item, $isActive, $columnSpace);
 		}, '');
 	}
@@ -214,12 +205,12 @@ class SelectHandler
 		);
 	}
 
-	public function terminalWidth()
+	public function terminalWidth(): int
 	{
 		return (new Terminal)->getWidth();
 	}
 
-	public function chunkSize()
+	public function chunkSize(): int
 	{
 		$max = $this->terminalWidth();
 		$largest = array_reduce($this->question->getOptions(), 'max', 0);
@@ -227,11 +218,11 @@ class SelectHandler
 		if ($largest > ($max / 2)) {
 			return 1;
 		}
-		elseif ($largest > ($max / 3)) {
+
+		if ($largest > ($max / 3)) {
 			return 2;
 		}
-		else {
-			return 3;
-		}
+
+		return 3;
 	}
 }

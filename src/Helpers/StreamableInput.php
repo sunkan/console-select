@@ -14,7 +14,7 @@ trait StreamableInput
 	/** @var resource */
 	protected $inputStream;
 
-	/** @return bool|resource */
+	/** @return false|resource */
 	protected function getInputStream()
 	{
 		if (empty($this->inputStream) && $this->input instanceof StreamableInputInterface) {

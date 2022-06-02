@@ -12,9 +12,9 @@ use EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange;
  */
 trait ChunkableOptions
 {
-	protected $chunks;
+	protected array $chunks;
 
-	protected $chunkSize = 3;
+	protected int $chunkSize = 3;
 
 	/**
 	 * @return array
@@ -34,7 +34,7 @@ trait ChunkableOptions
 
 	/**
 	 * @return array
-	 * @throws \EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange
+	 * @throws IndexOutOfRange
 	 */
 	public function getChunkAt(int $index): array
 	{
@@ -57,7 +57,7 @@ trait ChunkableOptions
 	}
 
 	/**
-	 * @throws \EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange
+	 * @throws IndexOutOfRange
 	 */
 	public function getEntryAt(int $rowIndex, int $colIndex): string
 	{
