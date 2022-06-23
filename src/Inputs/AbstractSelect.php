@@ -2,6 +2,7 @@
 
 namespace EddIriarte\Console\Inputs;
 
+use EddIriarte\Console\Handlers\SelectHandler;
 use EddIriarte\Console\Inputs\Traits\ChunkableOptions;
 use EddIriarte\Console\Inputs\Interfaces\SelectInput;
 
@@ -55,5 +56,10 @@ abstract class AbstractSelect implements SelectInput
 	public function isSelected(string $option): bool
 	{
 		return in_array($option, $this->selections, true);
+	}
+
+	public function controlMode(): int
+	{
+		return SelectHandler::DEFAULT_CTR;
 	}
 }

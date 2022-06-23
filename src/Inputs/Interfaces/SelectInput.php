@@ -21,4 +21,6 @@ interface SelectInput
 	public function isSelected(string $option): bool;
 
 	public function select(string $option): void;
+
+	public function controlMode(): int;
 }

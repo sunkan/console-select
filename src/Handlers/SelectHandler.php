@@ -8,6 +8,11 @@ use EddIriarte\Console\Inputs\Interfaces\SelectInput;
 
 class SelectHandler
 {
+	public const SIMPLE_CTR = 0x01;
+	public const COMPLEX_CTR = 0x02;
+
+	public const DEFAULT_CTR = self::COMPLEX_CTR;
+
 	/** @var resource */
 	protected $stream;
 	protected OutputInterface $output;
@@ -37,9 +42,9 @@ class SelectHandler
 	public function handle(): array
 	{
 		$this->firstRun = true;
-		$this->output->writeln(
-			'<info>' . $this->question->getMessage() . '</info> [<comment>SPACE=select</>, <comment>ENTER=submit</>]'
-		);
+		$ctrlMode = $this->question->controlMode();
+		$usage = $ctrlMode === self::SIMPLE_CTR ? '[<comment>ENTER=select</>]' : '[<comment>SPACE=select</>, <comment>ENTER=submit</>]';
+		$this->output->writeln('<info>' . $this->question->getMessage() . '</info> ' . $usage);
 		$this->repaint();
 
 		$sttyMode = shell_exec('stty -g');
@@ -50,13 +55,16 @@ class SelectHandler
 		// Read a keypress
 		while (!feof($this->stream)) {
 			$char = fread($this->stream, 1);
-			if (" " === $char) {
+			if (" " === $char && $ctrlMode !== self::SIMPLE_CTR) {
 				$this->tryCellSelection();
 			}
 			elseif ("\033" === $char) {
-				$this->tryCellNavigation($char);
+				$this->tryCellNavigation($char, $ctrlMode);
 			}
 			elseif (10 === ord($char)) {
+				if ($ctrlMode === self::SIMPLE_CTR && !$this->question->hasSelections()) {
+					$this->tryCellSelection();
+				}
 				//TODO handle valid state...
 				$this->clear();
 				$this->output->write('> ' . join(', ', $this->question->getSelections()));
@@ -116,7 +124,7 @@ class SelectHandler
 		}
 	}
 
-	protected function tryCellNavigation(string $char): void
+	protected function tryCellNavigation(string $char, int $ctrlMode = self::DEFAULT_CTR): void
 	{
 		// Did we read an escape sequence?
 		$char .= fread($this->stream, 2);
@@ -138,6 +146,9 @@ class SelectHandler
 			case 'D': // go left!
 				$this->left();
 				break;
+		}
+		if ($ctrlMode === self::SIMPLE_CTR) {
+			$this->tryCellSelection();
 		}
 	}
 
