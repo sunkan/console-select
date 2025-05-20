@@ -218,7 +218,7 @@ class SelectHandler
 	public function chunkSize(): int
 	{
 		$max = $this->terminalWidth();
-		$largest = array_reduce($this->question->getOptions(), 'max', 0);
+		$largest = array_reduce($this->question->getOptions(), fn ($x, $y) => max(strlen($y), $x), 0);
 
 		if ($largest > ($max / 2)) {
 			return 1;
@@ -228,6 +228,10 @@ class SelectHandler
 			return 2;
 		}
 
-		return 3;
+		if ($largest > ($max / 4)) {
+			return 3;
+		}
+
+		return 4;
 	}
 }
