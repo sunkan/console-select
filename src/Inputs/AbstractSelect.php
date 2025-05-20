@@ -10,9 +10,6 @@ abstract class AbstractSelect implements SelectInput
 {
 	use ChunkableOptions;
 
-	protected string $message;
-	/** @var list<string> */
-	protected array $options;
 	/** @var list<string> */
 	protected array $selections;
 
@@ -20,10 +17,11 @@ abstract class AbstractSelect implements SelectInput
 	 * @param list<string> $options
 	 * @param list<string> $defaultSelection
 	 */
-	public function __construct(string $message, array $options, array $defaultSelection = [])
-	{
-		$this->message = $message;
-		$this->options = $options;
+	public function __construct(
+		protected string $message,
+		protected array $options,
+		array $defaultSelection = [],
+	) {
 		$this->selections = $defaultSelection;
 	}
 

@@ -15,8 +15,6 @@ class SelectHandler
 
 	/** @var resource */
 	protected $stream;
-	protected OutputInterface $output;
-	protected SelectInput $question;
 	protected int $row;
 	protected int $column;
 	protected bool $firstRun = false;
@@ -25,12 +23,13 @@ class SelectHandler
 	/**
 	 * @param resource $stream
 	 */
-	public function __construct(SelectInput $question, OutputInterface $output, $stream)
-	{
+	public function __construct(
+		protected SelectInput $question,
+		protected OutputInterface $output,
+		$stream
+	) {
 		$this->row = 0;
 		$this->column = 0;
-		$this->question = $question;
-		$this->output = $output;
 		$this->stream = $stream;
 	}
 

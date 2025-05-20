@@ -19,14 +19,12 @@ class SelectionHelper implements HelperInterface
 {
 	use StreamableInput;
 
-	protected InputInterface $input;
-	protected OutputInterface $output;
 	protected ?HelperSet $helperSet = null;
 
-	public function __construct(InputInterface $input, OutputInterface $output)
-	{
-		$this->input = $input;
-		$this->output = $output;
+	public function __construct(
+		protected InputInterface $input,
+		protected OutputInterface $output,
+	) {
 
 		$this->checkAnsiSupport();
 		$this->setOutputStyles();
