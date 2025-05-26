@@ -26,7 +26,7 @@ class SelectHandler
 	public function __construct(
 		protected SelectInput $question,
 		protected OutputInterface $output,
-		$stream
+		$stream,
 	) {
 		$this->row = 0;
 		$this->column = 0;
@@ -54,7 +54,7 @@ class SelectHandler
 		// Read a keypress
 		while (!feof($this->stream)) {
 			$char = (string)fread($this->stream, 1);
-			if (" " === $char && $ctrlMode !== self::SIMPLE_CTR) {
+			if (' ' === $char && $ctrlMode !== self::SIMPLE_CTR) {
 				$this->tryCellSelection();
 			}
 			elseif ("\033" === $char) {
@@ -212,7 +212,7 @@ class SelectHandler
 
 	public function terminalWidth(): int
 	{
-		return (new Terminal)->getWidth();
+		return (new Terminal())->getWidth();
 	}
 
 	/**
