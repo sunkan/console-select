@@ -2,40 +2,18 @@
 
 A fancy selection interface for symfony's console component.
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/eddiriarte/console-select/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/eddiriarte/console-select/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/eddiriarte/console-select/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/eddiriarte/console-select/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/eddiriarte/console-select/badges/build.png?b=master)](https://scrutinizer-ci.com/g/eddiriarte/console-select/build-status/master)
-
-![gluten-free](http://forthebadge.com/images/badges/gluten-free.svg)
-![built-by-developers](http://forthebadge.com/images/badges/built-by-developers.svg)
-![check-it-out](http://forthebadge.com/images/badges/check-it-out.svg)
-
 ![Sample](docs/sample.gif)
 
 ## Requirements 
 
-This project is inteded to be runned with one of this frameworks:
+This project is intended to be run with one of these frameworks:
 
-- laravel 5.6+
-- symfony 5.0+
-- laravel-zero 5.6+
-
+- symfony/console 5.0+
 
 ## Install
 
 ```sh
-composer require eddiriarte/console-select
-```
-
-### On Laravel/Laravel-Zero
-
-Add the `SelectServiceProvider` to your provider list
-
-```php
-// app.php
-'providers' => [
-    EddIriarte\Console\Providers\SelectServiceProvider::class,
-],
+composer require sunkan/console-select
 ```
 
 ### On Symfony
@@ -44,7 +22,7 @@ Add the `EddIriarte\Console\Traits\SelectableInputs` trait to your command class
 
 ```php
 # importing : \EddIriarte\Console\Helpers\SelectionHelper
-# pasing the input and output interfaces
+# passing the input and output interfaces
 $this->getHelperSet()->set(
   new SelectionHelper($this->input, $this->output)
 );
@@ -127,24 +105,6 @@ $selected = $this->select(
 
 - Handle user-interruptions, such as `Ctrl+C`
 
-## MIT License
+## License
 
-Copyright (c) 2018 Eduardo Iriarte
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
