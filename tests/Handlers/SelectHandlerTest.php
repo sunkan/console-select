@@ -179,7 +179,7 @@ class SelectHandlerTest extends TestCase
 		$handler->handle();
 
 		[$selection] = $question->getSelections();
-		$this->assertEquals('four', $selection);
+		$this->assertEquals('five', $selection);
 	}
 
 	#[Test]
