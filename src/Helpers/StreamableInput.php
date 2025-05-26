@@ -6,14 +6,19 @@ use Symfony\Component\Console\Input\StreamableInputInterface;
 
 trait StreamableInput
 {
-	/** @var resource */
+	/** @var null|resource */
 	protected $inputStream;
 
-	/** @return false|resource */
+	/**
+	 * @return resource
+	 */
 	protected function getInputStream()
 	{
 		if (empty($this->inputStream) && $this->input instanceof StreamableInputInterface) {
 			$this->inputStream = $this->input->getStream() ?: STDIN;
+		}
+		if ($this->inputStream === null) {
+			throw new \RuntimeException('The input stream cannot be retrieved.');
 		}
 
 		return $this->inputStream;

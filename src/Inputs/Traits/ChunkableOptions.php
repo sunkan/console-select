@@ -6,13 +6,12 @@ use EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange;
 
 trait ChunkableOptions
 {
+	/** @var array<int, list<string>> */
 	protected array $chunks;
+	/** @var int<1, max> */
 	protected int $chunkSize = 3;
 
-	/**
-	 * @return array<int, list<string>>
-	 */
-	public function getChunks(int $chunkSize = null): array
+	public function getChunks(?int $chunkSize = null): array
 	{
 		if (!is_null($chunkSize)) {
 			$this->chunkSize = $chunkSize;
@@ -26,7 +25,7 @@ trait ChunkableOptions
 	}
 
 	/**
-	 * @return array<int, list<string>>
+	 * @return list<string>
 	 * @throws IndexOutOfRange
 	 */
 	public function getChunkAt(int $index): array

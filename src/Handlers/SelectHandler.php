@@ -53,7 +53,7 @@ class SelectHandler
 
 		// Read a keypress
 		while (!feof($this->stream)) {
-			$char = fread($this->stream, 1);
+			$char = (string)fread($this->stream, 1);
 			if (" " === $char && $ctrlMode !== self::SIMPLE_CTR) {
 				$this->tryCellSelection();
 			}
@@ -215,6 +215,9 @@ class SelectHandler
 		return (new Terminal)->getWidth();
 	}
 
+	/**
+	 * @return int<1, max>
+	 */
 	public function chunkSize(): int
 	{
 		$max = $this->terminalWidth();
