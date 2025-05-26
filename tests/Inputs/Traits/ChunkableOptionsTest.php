@@ -1,9 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Inputs;
 
 use EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange;
 use EddIriarte\Console\Inputs\Traits\ChunkableOptions;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ChunkableOptionsTest extends TestCase
@@ -83,10 +84,7 @@ class ChunkableOptionsTest extends TestCase
 		$this->assertEquals('h', $chunk[1]);
 	}
 
-	/**
-	 * @test
-	 *
-	 */
+	#[Test]
 	public function it_throws_exception_by_wrong_chunk_index()
 	{
 		$trait = $this->getMockForTrait(
@@ -99,7 +97,7 @@ class ChunkableOptionsTest extends TestCase
 			['getOptions']
 		);
 		$trait->method('getOptions')
-			->willReturn(['a', 'b', 'c', 'd',]);
+			->willReturn(['a', 'b', 'c', 'd']);
 
 		$this->expectException(IndexOutOfRange::class);
 
@@ -127,10 +125,7 @@ class ChunkableOptionsTest extends TestCase
 		$this->assertEquals(3, $chunkCount);
 	}
 
-	/**
-	 * @test
-	 *
-	 */
+	#[Test]
 	public function it_throws_exception_by_wrong_entry_index()
 	{
 		$trait = $this->getMockForTrait(
@@ -142,7 +137,7 @@ class ChunkableOptionsTest extends TestCase
 			true,
 			['getOptions']
 		);
-		$trait->method('getOptions')->willReturn(['a', 'b', 'c', 'd',]);
+		$trait->method('getOptions')->willReturn(['a', 'b', 'c', 'd']);
 
 		$this->expectException(\EddIriarte\Console\Inputs\Exceptions\IndexOutOfRange::class);
 

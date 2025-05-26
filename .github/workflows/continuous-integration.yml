@@ -72,7 +72,7 @@ jobs:
         run: "composer update ${{ env.COMPOSER_FLAGS }}"
 
       - name: "Check codestyle"
-        run: "./vendor/bin/phpcs -n --standard=vendor/stefna/codestyle/library.xml src/ tests/"
+        run: "./vendor/bin/phpcs -n"
 
   static-analysis:
     name: "Static analysis"

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests;
 
@@ -9,5 +9,5 @@ interface Key
 	const RIGHT = "\033[C";
 	const LEFT = "\033[D";
 	const SUBMIT = "\n";
-	const SELECT = " ";
+	const SELECT = ' ';
 }

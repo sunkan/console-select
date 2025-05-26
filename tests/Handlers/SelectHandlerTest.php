@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Handlers;
 
@@ -108,7 +108,7 @@ class SelectHandlerTest extends TestCase
 			'seven',
 		]);
 		$output = self::createOutputInterface();
-		$stream = self::getInputStream("");
+		$stream = self::getInputStream('');
 
 		$handler = new SelectHandler($question, $output, $stream);
 
@@ -128,7 +128,7 @@ class SelectHandlerTest extends TestCase
 			'one', 'two', 'three',
 		]);
 
-		$buffer = new TestConsoleBuffer;
+		$buffer = new TestConsoleBuffer();
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
 		$output
@@ -160,7 +160,7 @@ class SelectHandlerTest extends TestCase
 			'one', 'two', 'three', 'four', 'five', 'six',
 		]);
 
-		$buffer = new TestConsoleBuffer;
+		$buffer = new TestConsoleBuffer();
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
 		$output
@@ -189,7 +189,7 @@ class SelectHandlerTest extends TestCase
 			'one', 'two', 'three', 'four', 'five', 'six',
 		]);
 
-		$buffer = new TestConsoleBuffer;
+		$buffer = new TestConsoleBuffer();
 
 		$output = $this->getMockBuilder(OutputInterface::class)->getMock();
 		$output
@@ -216,7 +216,7 @@ class SelectHandlerTest extends TestCase
 
 class TestConsoleBuffer
 {
-	protected $buffer = "";
+	protected $buffer = '';
 
 	public function write($msg, $level)
 	{
