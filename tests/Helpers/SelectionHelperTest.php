@@ -4,6 +4,7 @@ namespace Tests\Helpers;
 
 use EddIriarte\Console\Helpers\SelectionHelper;
 use EddIriarte\Console\Inputs\CheckboxInput;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -16,9 +17,7 @@ class SelectionHelperTest extends TestCase
 {
 	use InputOutputStreamMocks;
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_initializes_output_styles(): void
 	{
 		$hasStyle = false;
@@ -39,9 +38,7 @@ class SelectionHelperTest extends TestCase
 		$this->assertTrue($hasStyle, 'Style was not initialized');
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_gets_name(): void
 	{
 		$formatter = $this->getMockBuilder(OutputFormatterInterface::class)->getMock();
@@ -57,9 +54,7 @@ class SelectionHelperTest extends TestCase
 		$this->assertEquals('selection', $name);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_manipulates_helpersets(): void
 	{
 		$formatter = $this->getMockBuilder(OutputFormatterInterface::class)->getMock();
@@ -76,9 +71,7 @@ class SelectionHelperTest extends TestCase
 		$this->assertNotEmpty($helper->getHelperSet(), "HelperSet isn't  set!");
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_triggers_selection(): void
 	{
 		$stream = $this->getInputStream(Key::RIGHT . Key::SELECT);

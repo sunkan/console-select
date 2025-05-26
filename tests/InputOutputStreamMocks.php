@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\StreamOutput;
 
 trait InputOutputStreamMocks
 {
-	public function getInputStream($input)
+	public static function getInputStream($input)
 	{
 		$stream = fopen('php://memory', 'r+', false);
 		fwrite($stream, $input);
@@ -30,7 +30,7 @@ trait InputOutputStreamMocks
 		return $mock;
 	}
 
-	public function createOutputInterface(bool $canWrite = false): StreamOutput
+	public static function createOutputInterface(bool $canWrite = false): StreamOutput
 	{
 		return new StreamOutput(
 			fopen('php://memory', ($canWrite ? 'w+' : 'r+'), false)

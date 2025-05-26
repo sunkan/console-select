@@ -1,6 +1,7 @@
 /vendor/
 /.idea/
 /builds/
+.phpunit.cache
 
 \.scannerwork/
 

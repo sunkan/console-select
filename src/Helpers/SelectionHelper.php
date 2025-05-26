@@ -33,7 +33,7 @@ class SelectionHelper implements HelperInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function setHelperSet(HelperSet $helperSet = null): void
+	public function setHelperSet(?HelperSet $helperSet = null): void
 	{
 		$this->helperSet = $helperSet;
 	}

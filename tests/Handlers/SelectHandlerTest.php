@@ -5,6 +5,8 @@ namespace Tests\Handlers;
 use EddIriarte\Console\Handlers\SelectHandler;
 use EddIriarte\Console\Inputs\CheckboxInput;
 use EddIriarte\Console\Inputs\RadioInput;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tests\InputOutputStreamMocks;
@@ -14,9 +16,7 @@ class SelectHandlerTest extends TestCase
 {
 	use InputOutputStreamMocks;
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_handles_radio_inputs(): void
 	{
 		$question = new RadioInput('Select one', ['one', 'two', 'three']);
@@ -39,9 +39,7 @@ class SelectHandlerTest extends TestCase
 		$this->assertEquals('two', $selections[0]);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_handles_checkboxes_inputs(): void
 	{
 		$question = new CheckboxInput('Select one', ['one', 'two', 'three']);
@@ -65,9 +63,7 @@ class SelectHandlerTest extends TestCase
 		$this->assertEquals('two', $selections[1]);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_handles_selection_toggle(): void
 	{
 		$question = new CheckboxInput('Select one', ['one', 'two', 'three']);
@@ -92,10 +88,8 @@ class SelectHandlerTest extends TestCase
 		$this->assertEquals('two', $selections[0]);
 	}
 
-	/**
-	 * @test
-	 * @dataProvider provideExistenceCheckers
-	 */
+	#[Test]
+	#[DataProvider('provideExistenceCheckers')]
 	public function it_checks_option_existence($handler, $row, $column, $expected): void
 	{
 		$exists = $handler->exists($row, $column);
@@ -106,15 +100,15 @@ class SelectHandlerTest extends TestCase
 	/**
 	 * @return array<array-key, array{SelectHandler, int, int, bool}>
 	 */
-	public function provideExistenceCheckers(): array
+	public static function provideExistenceCheckers(): array
 	{
 		$question = new CheckboxInput('Select one', [
 			'one', 'two', 'three',
 			'four', 'five', 'six',
 			'seven',
 		]);
-		$output = $this->createOutputInterface();
-		$stream = $this->getInputStream("");
+		$output = self::createOutputInterface();
+		$stream = self::getInputStream("");
 
 		$handler = new SelectHandler($question, $output, $stream);
 
@@ -127,9 +121,7 @@ class SelectHandlerTest extends TestCase
 		];
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_clears_checkbox_output(): void
 	{
 		$question = new CheckboxInput('Select an item', [
@@ -161,9 +153,7 @@ class SelectHandlerTest extends TestCase
 		$this->assertNotEquals($before, $after);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_can_navigate_down(): void
 	{
 		$question = new CheckboxInput('Select an item', [
@@ -192,9 +182,7 @@ class SelectHandlerTest extends TestCase
 		$this->assertEquals('four', $selection);
 	}
 
-	/**
-	 * @test
-	 */
+	#[Test]
 	public function it_can_navigate_up(): void
 	{
 		$question = new CheckboxInput('Select an item', [
